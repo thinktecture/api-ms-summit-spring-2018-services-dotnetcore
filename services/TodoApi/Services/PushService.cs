@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace TodoApi.Services
 {
@@ -130,15 +131,15 @@ namespace TodoApi.Services
 				return;
 
 			var connection = new HubConnectionBuilder()
-				.WithLoggerFactory(_loggerFactory)
+				.ConfigureLogging(lb => lb.AddSerilog())
 				.WithUrl($"{_config.GetSection("PushServer").GetValue<string>("Url")}/hubs/list?token=" + token)
 				.Build();
 
-			connection.Closed += (e) => { _connection = null; };
+			connection.Closed += async (e) => { _connection = null; };
 
 			_logger?.LogDebug($"{nameof(Connect)}: Trying to connect with token {{Token}}", token);
 
-			await connection.StartAsync();
+			await connection.StartAsync(cancellationtoken).ConfigureAwait(false);
 			_connection = connection;
 		}
 
