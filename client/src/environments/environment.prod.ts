@@ -7,7 +7,7 @@ export const environment = {
 };
 
 export class LoginConfiguration extends LoginModuleConfiguration {
-  authorityUrl = 'https://dotnetsummit-spring-2018-services-identity.azurewebsites.net';
+  authorityUrl = 'https://api-ms-summit-spring-2018-services-identity.azurewebsites.net';
   clientId = 'guiclient';
   clientSecret = 'guisecret';
   loginUrl = '/login';
@@ -15,9 +15,9 @@ export class LoginConfiguration extends LoginModuleConfiguration {
 }
 
 export class TodoConfiguration extends TodoModuleConfiguration {
-  apiUrl = 'https://dotnetsummit-spring-2018-services-api.azurewebsites.net/api';
+  apiUrl = 'https://api-ms-summit-spring-2018-services-api.azurewebsites.net/api';
 }
 
 export class RealtimeConfiguration extends RealtimeModuleConfiguration {
-  hubUrl = 'https://dotnetsummit-spring-2018-services-push.azurewebsites.net';
+  hubUrl = 'https://api-ms-summit-spring-2018-services-push.azurewebsites.net';
 }
